@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 // const tempMovieData = [
 // {
 //   imdbID: "tt1375666",
-//   Title: "Inception",
+//   Title: "Inception",ff
 //   Year: "2010",
 //   Poster:
 //     "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
