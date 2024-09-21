@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 // const tempMovieData = [
 // {
 //   imdbID: "tt1375666",
-//   Title: "Inception",ff
+//   Title: "Inception",
 //   Year: "2010",
 //   Poster:
 //     "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
 // },
 // {
-//   imdbID: "tt0133093",asagit status
+//   imdbID: "tt0133093",
 //   Title: "The Matrix",
 //   Year: "1999",
 //   Poster:
