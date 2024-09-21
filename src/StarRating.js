@@ -11,11 +11,10 @@ const starContainerStyle = {
 };
 
 StarRating.propTypes = {
-  maxRating: PropTypes.number,
   messages: PropTypes.array,
   size: PropTypes.number,
   className: PropTypes.string,
-  defaultRating: PropTypes.number,
+
   onSetRating: PropTypes.func,
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
