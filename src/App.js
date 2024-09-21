@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 //     "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
 // },
 // {
-//   imdbID: "tt0133093",
+//   imdbID: "tt0133093",asagit status
 //   Title: "The Matrix",
 //   Year: "1999",
 //   Poster:
