@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StarRating from "./StarRating.js";
 // http://www.omdbapi.com/?apikey=${KEY}&
 // http://img.omdbapi.com/?apikey=${KEY}&
 // http://www.omdbapi.com/?apikey=${KEY}&t=twister&type=movie&plot=full"
@@ -236,12 +237,84 @@ function Movie({ movie, onSelectMovie }) {
 }
 
 function MovieDetails({ selectedId, onCloseMovie }) {
+  const [movie, setMovie] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function getMovieDetails() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch movie details");
+        const data = await res.json();
+        setMovie(data);
+      } catch (error) {
+        console.error("Error fetching movie details:", error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getMovieDetails();
+  }, [selectedId, setIsLoading]);
+
+  const {
+    Title: title,
+    Year: year,
+    Poster: poster,
+    Runtime: runtime,
+    imdbRating,
+    Plot: plot,
+    Released: released,
+    Actors: actors,
+    Director: director,
+    Genre: genre,
+  } = movie;
+
+  const rating = imdbRating ? Math.round(imdbRating) : 0;
+
   return (
     <div className="details">
-      <button className="btn-back" onClick={onCloseMovie}>
-        &larr;
-      </button>
-      {selectedId}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <header>
+            <button className="btn-back" onClick={onCloseMovie}>
+              &larr;
+            </button>
+            <img src={poster} alt={`Poster of ${title}`} />
+            <div className="details-overview">
+              <h2>{title}</h2>
+              <p>
+                {released || "Unknown release date"} &bull;{" "}
+                {runtime || "Unknown runtime"}
+              </p>
+              <p>{genre || "Unknown genre"}</p>
+              <p>
+                <span>⭐</span>
+                {imdbRating
+                  ? `${imdbRating} IMDb rating`
+                  : "No rating available"}
+              </p>
+            </div>
+          </header>
+
+          <section>
+            <div className="rating">
+              <StarRating maxRating={10} size={24} defaultRating={rating} />
+            </div>
+
+            <p>
+              <em>{plot || "No plot available"}</em>
+            </p>
+            <p>Directed by: {director || "Unknown director"}</p>
+            <p>Starring: {actors || "Unknown actors"}</p>
+            <p>{year || "Unknown year"}</p>
+          </section>
+        </>
+      )}
     </div>
   );
 }
