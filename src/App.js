@@ -255,7 +255,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [userRating, setUserRating] = useState("");
 
   const isWatched = watched.some((movies) => movies.imdbID === selectedId);
-  console.log(isWatched);
 
   useEffect(() => {
     async function getMovieDetails() {
@@ -303,12 +302,18 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onAddWatched(newWatchedMovie);
     onCloseMovie();
   }
+
   useEffect(() => {
     function changeTitle() {
-      // if (!title) return;
+      if (!title) return; // Uncomment this line if you want to prevent setting the title if it's undefined or empty.
       document.title = `Movie ${title}`;
     }
+
     changeTitle();
+
+    return function cleanup() {
+      document.title = "usePopcorn";
+    };
   }, [title]);
 
   return (
