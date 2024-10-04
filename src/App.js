@@ -54,7 +54,7 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 const KEY = "8cd9d2b";
 export default function App() {
-  const [query, setQuery] = useState("Twister");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,7 +112,7 @@ export default function App() {
           setMovies(data.Search);
           setError("");
         } catch (err) {
-          console.error(err.message);
+          console.log(err.message);
 
           if (err.name !== "AbortError") {
             setError(err.message);
@@ -126,6 +126,7 @@ export default function App() {
         setError("");
         return;
       }
+      handleCloseMovie();
       fetchMovies();
       return function () {
         controller.abort();
