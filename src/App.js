@@ -311,6 +311,20 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onAddWatched(newWatchedMovie);
     onCloseMovie();
   }
+  useEffect(
+    function () {
+      function handleEscapeKey(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+        }
+      }
+      document.addEventListener("keydown", handleEscapeKey);
+      return function cleanup() {
+        document.removeEventListener("keydown", handleEscapeKey);
+      };
+    },
+    [onCloseMovie]
+  );
 
   useEffect(() => {
     function changeTitle() {
